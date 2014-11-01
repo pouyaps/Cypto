@@ -1,0 +1,49 @@
+from operator import itemgetter
+cipher_txt= "gryticdettpjcjgtmtntajgryticdkrqstmkojgjgtmtrmjgtatnrgdpmatmjgcdnrpmhgoqmatpetopzsoqqtmfcajgtoaeatrmrpmjgtfozdatnmcpjqotjgtinltrscfgdwrpmontrntedjktmckgrjktkrpjrpmktjgopskgrjktlqtrntgryticdqoytmjgttultaotphtgryticdkojptnntmjgtlqrzdtltclqtwrsopzereotnncwtjowtnxdnjjctnhrltopjgonqrpmcfhcwltjojocpjgthcwlrnnocponzcptitjktozpcatjgtpttmirpmktsttlldngopzcpktsttlldngopzcpjgononxdnjrldpsachsncpzkaojjtpfcajgtltclqtkgchrpnttncwtjgopznkacpzqostrpjnoprhcqcpiktmccdangratedjjgtatnncwrpicjgtafdhsopopnthjncdjjgtatrpmjgononxdnjrldpsachsncpzqostkcastanoprfrhjcaiktmccdangratedjjgtatnncwrpicjgtafdhsopacecjncdjjgtatgryticdyonojtmjgtbdrzwoatgryticdnkrwopjgtngojjgtlrajihcpytpjocpnrpmjgtatrqlcqojosjgtfrhtnrqkrinmofftatpjjgtagtjcaohjgtnrwtedjktnkrqqckojrpmktnttpcjgopzhgrpztpcjgopzgrnhgrpztmjtpwoqqocpmcqqrancprqcnopzhrwlrozpjktpjiwoqqocpnjrayopzrpmkaojgopzoplropeoznjacpzltclqtdpkoqqopzjczoytnwrqqopyonocprpmltanlthjoytcptopfoytsomnetqckjgtlcytajiqoptcptlcldqrjocpadppopcdjcfjowt"
+English_Freq=['e','t','a','o','i','n','s','h','r','d','l','u','c','m','f','w','g','y','p','b','v','k','x','j','q','z']
+list_cipher_txt=list(cipher_txt)
+i=len(list_cipher_txt)
+list_decrypted_txt=['a']
+list_decrypted_txt.remove('a')
+
+dic_Cipher_Freq={'a':1}
+dic_Cipher_Freq.clear()
+int_counter=0
+
+#Create a dictionary for the frequent letters in Cipher text
+while int_counter<26:
+    char=chr(97+int_counter)
+    count_Letter=list_cipher_txt.count(char)
+    if count_Letter>0:
+        dic_Cipher_Freq[char]=count_Letter
+    int_counter+=1
+dic_Cipher_Freq=sorted(dic_Cipher_Freq.items(), key=itemgetter(1), reverse=True)
+list_Cipher_Freq=['a']
+list_Cipher_Freq.remove('a')
+length_Dic_Cipher=len(dic_Cipher_Freq)
+
+#Creat a list from the Cipher frequent letters:
+for n in range(0,length_Dic_Cipher):
+    list_Cipher_Freq.append(dic_Cipher_Freq[n][0])
+int_counter=0
+list_decrypted_txt.clear()
+
+#Print the Cipher letter with its replacement candidate of frequent english letter:
+while int_counter<length_Dic_Cipher:
+    print(list_Cipher_Freq[int_counter]+" : " + English_Freq[int_counter])
+    int_counter+=1
+    
+#Substitute the letter and creat the decrypted list:
+for x in range(0,i):
+    list_decrypted_txt.append(English_Freq[list_Cipher_Freq.index(list_cipher_txt[x])])
+    
+
+print("Cipher text length: " + str(i))
+print(list_cipher_txt)
+print("*************")
+print("Plain text length: " + str(len(list_decrypted_txt)))
+
+print(list_decrypted_txt)
+str1 = ''.join(list_decrypted_txt)
+print("Decrypted Text:")
+print(str1)
